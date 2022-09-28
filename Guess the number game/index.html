@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Luca Frattari" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Guess the number</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <style></style>
+  </head>
+  <body>
+    <main class="paginabase">
+      <h1>
+        Welcome to <br />
+        Guess The Number Game!
+      </h1>
+      <div class="mybutton">
+        <!-----Select your name----->
+
+        <button onclick="greeting()">Let's Play!</button>
+      </div>
+      <p id="dude"></p>
+      <p>
+        Enter a number between a minimum and a maximum<br />
+        to start guessing...
+      </p>
+      <div class="mybutton">
+        <!-----Star the game----->
+
+        <button onclick="guessTheNumber()">Guess!</button>
+      </div>
+
+      <!-----Main Function----->
+      <script>
+        const greeting = function () {
+          let person = prompt("Welcome! What is your name?");
+
+          if (person != null) {
+            document.getElementById("dude").innerHTML =
+              "Hey " + person + "! How are you?";
+          }
+          window.person = person;
+        };
+        const guessTheNumber = function () {
+          // Select your numbers range
+
+          let min = parseInt(prompt("Set the minimum number"));
+          let max = parseInt(prompt("Set the maximum number"));
+          let yourNumber = prompt("What is the right number?");
+          let triesLeft = 5;
+          for (let i = 0; i < triesLeft; i++) {
+            let getNumber = Math.floor(Math.random() * (max - min + 1) + min);
+            // Conditions
+
+            if (yourNumber == getNumber) {
+              alert("Congratulations! You won the game.");
+              alert("Bye ," + person + " see you!");
+              return;
+            } else if (yourNumber !== getNumber) {
+              alert(
+                "Ops! It seems you choose the wrong number...\n The right number was " +
+                  getNumber
+              );
+            }
+            // Tries left
+            if (i < triesLeft - 1) {
+              alert(`You have ${triesLeft - 1 - i} tries left, try again`);
+              yourNumber = prompt("What is the right number?");
+            } else {
+              alert("You run out your tries\n Game Over");
+            }
+          }
+        };
+      </script>
+    </main>
+  </body>
+</html>
